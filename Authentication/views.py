@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.views import View
 from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm
@@ -18,10 +17,10 @@ class SignUpView(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # or your home url name
+            return redirect('home')
         return render(request, self.template_name, {'form': form})
 
-    
+
 
 
 class SignInView(View):
@@ -41,7 +40,7 @@ class SignInView(View):
         return render(request, self.template_name, {'form': form})
 
         
-class SignOutView(View): 
+class SignOutView(View):
     def get(self, request):
         logout(request)
         return redirect('signin')
